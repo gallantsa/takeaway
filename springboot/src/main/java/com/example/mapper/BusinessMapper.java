@@ -9,5 +9,7 @@ import java.util.List;
  */
 public interface BusinessMapper {
 
-    List<Business> selectAll();
+    List<Business> selectAll(Business business);
+
+    void insert(Business business);
 }

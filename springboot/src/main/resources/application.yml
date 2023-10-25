@@ -19,7 +19,7 @@ mybatis:
   type-aliases-package: com.example.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: true # 开启驼峰
 
 # 分页
 pagehelper:

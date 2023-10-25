@@ -41,9 +41,34 @@ public class Business {
     private String phone;
 
     /**
-     * 邮箱
+     * 简介
      */
-    private String email;
+    private String info;
+
+    /**
+     * 地址
+     */
+    private String address;
+
+    /**
+     * 营业执照
+     */
+    private String license;
+
+    /**
+     * 审核状态
+     */
+    private String status;
+
+    /**
+     * 营业时间
+     */
+    private String timeRange;
+
+    /**
+     * 类型
+     */
+    private String type;
 
     public Integer getId() {
         return id;
@@ -101,11 +126,51 @@ public class Business {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getInfo() {
+        return info;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getLicense() {
+        return license;
+    }
+
+    public void setLicense(String license) {
+        this.license = license;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getTimeRange() {
+        return timeRange;
+    }
+
+    public void setTimeRange(String timeRange) {
+        this.timeRange = timeRange;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
