@@ -5,6 +5,7 @@ import com.example.common.Result;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.entity.Business;
 import com.example.service.BusinessService;
+import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +21,11 @@ public class BusinessController {
     @Resource
     private BusinessService businessService;
 
+    /**
+     * 新增商家
+     * @param business
+     * @return
+     */
     @PostMapping("/add")
     public Result add(@RequestBody Business business) {
         // 数据校验
@@ -30,10 +36,75 @@ public class BusinessController {
         return Result.success();
     }
 
+    /**
+     * 删除商家
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/delete/{id}")
+    public Result delete(@PathVariable Integer id) {
+        businessService.deleteById(id);
+        return Result.success();
+    }
+
+    /**
+     * 批量删除商家
+     * @param ids
+     * @return
+     */
+    @DeleteMapping("/delete/batch")
+    public Result deleteBatch(@RequestBody List<Integer> ids) {
+        businessService.deleteBatch(ids);
+        return Result.success();
+    }
+
+
+    /**
+     * 修改商家
+     * @param business
+     * @return
+     */
+    @PutMapping("/update")
+    public Result update(@RequestBody Business business) {
+        businessService.updateById(business);
+        return Result.success();
+    }
+
+    /**
+     * 查询商家列表
+     * @param business
+     * @return
+     */
     @GetMapping("/selectAll")
     public Result selectAll(Business business) {
         List<Business> list = businessService.selectAll(business);
         return Result.success(list);
+    }
+
+    /**
+     * 根据id查询单个商家
+     * @param id
+     * @return
+     */
+    @GetMapping("/selectById/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        Business business = businessService.selectById(id);
+        return Result.success(business);
+    }
+
+    /**
+     * 分页查询商家列表
+     * @param business
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @GetMapping("/selectPage")
+    public Result selectPage(Business business,
+                             @RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize) {
+        PageInfo<Business> pageInfo = businessService.selectPage(business, pageNum, pageSize);
+        return Result.success(pageInfo);
     }
 
 
