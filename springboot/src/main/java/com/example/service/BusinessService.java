@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.entity.Admin;
 import com.example.entity.Business;
 import com.example.exception.CustomException;
 import com.example.mapper.BusinessMapper;
@@ -162,5 +163,17 @@ public class BusinessService {
         String token = TokenUtils.createToken(tokenData, dbBusiness.getPassword());
         dbBusiness.setToken(token);
         return dbBusiness;
+    }
+
+    public void updatePassword(Account account) {
+        Business dbBusiness = this.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbBusiness)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        if (!account.getPassword().equals(dbBusiness.getPassword())) {
+            throw new CustomException(ResultCodeEnum.PARAM_PASSWORD_ERROR);
+        }
+        dbBusiness.setPassword(account.getNewPassword());
+        this.updateById(dbBusiness);
     }
 }

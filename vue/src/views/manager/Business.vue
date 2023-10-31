@@ -38,7 +38,13 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column prop="status" label="审核状态"></el-table-column>
+        <el-table-column prop="status" label="审核状态">
+          <template v-slot="scope">
+            <el-tag type="info" v-if="scope.row.status === '待审核'">待审核</el-tag>
+            <el-tag type="success" v-if="scope.row.status === '通过'">通过</el-tag>
+            <el-tag type="danger" v-if="scope.row.status === '拒绝'">拒绝</el-tag>
+          </template>
+        </el-table-column>
         <el-table-column prop="timeRange" label="营业时间"></el-table-column>
         <el-table-column prop="type" label="类型"></el-table-column>
         <el-table-column label="操作" align="center" width="180">
@@ -114,7 +120,6 @@
               class="avatar-uploader"
               :action="$baseUrl + '/files/upload'"
               :headers="{ token: user.token }"
-              :file-list="form.license? [form.license] : []"
               list-type="picture"
               :on-success="handleLicenseSuccess"
           >
