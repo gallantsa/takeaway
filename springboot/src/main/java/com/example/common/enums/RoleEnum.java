@@ -5,4 +5,6 @@ public enum RoleEnum {
     ADMIN,
     // 商家
     BUSINESS,
+    // 用户
+    USER
 }
