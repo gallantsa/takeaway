@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * 用户表
  */
-public class User implements Serializable {
+public class User extends Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /** ID */

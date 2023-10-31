@@ -3,7 +3,7 @@ package com.example.entity;
 /**
  * 商家
  */
-public class Business {
+public class Business extends Account {
 
     /**
      * 主键

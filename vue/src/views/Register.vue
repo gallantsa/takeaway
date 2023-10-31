@@ -10,7 +10,7 @@
           <el-input prefix-icon="el-icon-lock" placeholder="请输入密码" show-password  v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item prop="confirmPass">
-          <el-input prefix-icon="el-icon-lock" placeholder="请确认密码" show-password  v-model="form.confirmPass"></el-input>
+          <el-input prefix-icon="el-icon-lock" placeholder="请确认密码" show-password v-model="form.confirmPass"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button style="width: 100%; background-color: #333; border-color: #333; color: white" @click="register">注 册</el-button>
@@ -30,28 +30,31 @@
 export default {
   name: "Register",
   data() {
-    // 验证码校验
-    const validatePassword = (rule, confirmPass, callback) => {
-      if (confirmPass === '') {
-        callback(new Error('请确认密码'))
-      } else if (confirmPass !== this.form.password) {
-        callback(new Error('两次输入的密码不一致'))
+    let validateConfirmPass = (rule, value, callback) => {
+      if (value === '') {
+        callback(new Error('请再次输入密码'));
+      } else if (value !== this.form.password) {
+        callback(new Error('两次输入密码不一致!'));
       } else {
-        callback()
+        callback();
       }
     }
     return {
-      form: {},
+      form: { role: 'BUSINESS' },
       rules: {
         username: [
           { required: true, message: '请输入账号', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' },
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' },
         ],
         confirmPass: [
-          { validator: validatePassword, trigger: 'blur' }
-        ]
+          { required: true, message: '请确认密码', trigger: 'blur' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' },
+          { validator: validateConfirmPass, trigger: 'blur' }
+        ],
       }
     }
   },
@@ -65,7 +68,7 @@ export default {
           // 验证通过
           this.$request.post('/register', this.form).then(res => {
             if (res.code === '200') {
-              this.$router.push('/')  // 跳转登录页面
+              this.$router.push('/login')  // 跳转到登录页
               this.$message.success('注册成功')
             } else {
               this.$message.error(res.msg)
@@ -82,7 +85,7 @@ export default {
 .container {
   height: 100vh;
   overflow: hidden;
-  background-image: url("@/assets/imgs/bg1.jpg");
+  background-image: url("@/assets/imgs/bg.jpg");
   background-size: 100%;
   display: flex;
   align-items: center;
