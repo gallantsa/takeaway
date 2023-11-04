@@ -26,6 +26,7 @@ const routes = [
       { path: 'user', name: 'User', meta: { name: '用户信息' }, component: () => import('../views/manager/User') },
       { path: 'businessPerson', name: 'BusinessPerson', meta: { name: '商家个人信息' }, component: () => import('../views/manager/BusinessPerson') },
       { path: 'category', name: 'Category', meta: { name: '商品分类信息' }, component: () => import('../views/manager/Category') },
+      { path: 'goods', name: 'Goods', meta: { name: '商品信息' }, component: () => import('../views/manager/Goods') },
     ]
   },
   {
