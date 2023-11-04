@@ -42,6 +42,7 @@
             <template slot="title">
               <i class="el-icon-menu"></i><span>信息管理</span>
             </template>
+            <el-menu-item index="/category">商品分类信息</el-menu-item>
             <el-menu-item index="/notice" v-if="user.role === 'ADMIN'">公告信息</el-menu-item>
           </el-submenu>
 

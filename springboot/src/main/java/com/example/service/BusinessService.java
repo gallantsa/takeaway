@@ -165,6 +165,10 @@ public class BusinessService {
         return dbBusiness;
     }
 
+    /**
+     * 修改密码
+     * @param account
+     */
     public void updatePassword(Account account) {
         Business dbBusiness = this.selectByUsername(account.getUsername());
         if (ObjectUtil.isNull(dbBusiness)) {
@@ -175,5 +179,18 @@ public class BusinessService {
         }
         dbBusiness.setPassword(account.getNewPassword());
         this.updateById(dbBusiness);
+    }
+
+    /**
+     * 检查商家是否有权限添加数据
+     */
+    public void checkBusinessAuth() {
+        Account currentUser = TokenUtils.getCurrentUser(); // 获取当前登录的用户信息
+        if (RoleEnum.BUSINESS.name().equals(currentUser.getRole())) { // 如果是商家
+            Business business = selectById(currentUser.getId());
+            if (!"通过".equals(business.getStatus())) { // 如果商家的状态是待审核, 不允许添加数据
+                throw new CustomException(ResultCodeEnum.NO_AUTH);
+            }
+        }
     }
 }

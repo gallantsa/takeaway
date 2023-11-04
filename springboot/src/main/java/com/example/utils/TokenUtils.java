@@ -8,6 +8,7 @@ import com.example.common.Constants;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
+import com.example.service.BusinessService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -27,14 +28,22 @@ public class TokenUtils {
 
     private static final Logger log = LoggerFactory.getLogger(TokenUtils.class);
 
+    // 由于该类中有静态方法，所以无法通过注入的方式获取bean，只能通过静态变量的方式获取
     private static AdminService staticAdminService;
+
+    private static BusinessService staticBusinessService;
 
     @Resource
     AdminService adminService;
 
+    @Resource
+    BusinessService businessService;
+
+
     @PostConstruct
     public void setUserService() {
         staticAdminService = adminService;
+        staticBusinessService = businessService;
     }
 
     /**
@@ -59,6 +68,8 @@ public class TokenUtils {
                 String role = userRole.split("-")[1];    // 获取角色
                 if (RoleEnum.ADMIN.name().equals(role)) {
                     return staticAdminService.selectById(Integer.valueOf(userId));
+                } else if (RoleEnum.BUSINESS.name().equals(role)) {
+                    return staticBusinessService.selectById(Integer.valueOf(userId));
                 }
             }
         } catch (Exception e) {
