@@ -28,6 +28,7 @@ const routes = [
       { path: 'category', name: 'Category', meta: { name: '商品分类信息' }, component: () => import('../views/manager/Category') },
       { path: 'goods', name: 'Goods', meta: { name: '商品信息' }, component: () => import('../views/manager/Goods') },
       { path: 'banner', name: 'Banner', meta: { name: '商品信息' }, component: () => import('../views/manager/Banner') },
+      { path: 'orders', name: 'Orders', meta: { name: '商品信息' }, component: () => import('../views/manager/Orders') },
     ]
   },
   {
