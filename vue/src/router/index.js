@@ -27,8 +27,9 @@ const routes = [
       { path: 'businessPerson', name: 'BusinessPerson', meta: { name: '商家个人信息' }, component: () => import('../views/manager/BusinessPerson') },
       { path: 'category', name: 'Category', meta: { name: '商品分类信息' }, component: () => import('../views/manager/Category') },
       { path: 'goods', name: 'Goods', meta: { name: '商品信息' }, component: () => import('../views/manager/Goods') },
-      { path: 'banner', name: 'Banner', meta: { name: '商品信息' }, component: () => import('../views/manager/Banner') },
-      { path: 'orders', name: 'Orders', meta: { name: '商品信息' }, component: () => import('../views/manager/Orders') },
+      { path: 'banner', name: 'Banner', meta: { name: '广告信息' }, component: () => import('../views/manager/Banner') },
+      { path: 'orders', name: 'Orders', meta: { name: '订单信息' }, component: () => import('../views/manager/Orders') },
+      { path: 'collect', name: 'Collect', meta: { name: '收藏信息' }, component: () => import('../views/manager/Collect') },
     ]
   },
   {

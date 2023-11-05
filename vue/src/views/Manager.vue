@@ -45,6 +45,7 @@
             <el-menu-item index="/category">商品分类信息</el-menu-item>
             <el-menu-item index="/goods">商品信息</el-menu-item>
             <el-menu-item index="/orders">订单管理信息</el-menu-item>
+            <el-menu-item index="/collect">店铺收藏信息</el-menu-item>
             <el-menu-item index="/banner" v-if="user.role === 'ADMIN'">广告信息</el-menu-item>
             <el-menu-item index="/notice" v-if="user.role === 'ADMIN'">公告信息</el-menu-item>
           </el-submenu>
