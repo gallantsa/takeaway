@@ -30,6 +30,7 @@ const routes = [
       { path: 'banner', name: 'Banner', meta: { name: '广告信息' }, component: () => import('../views/manager/Banner') },
       { path: 'orders', name: 'Orders', meta: { name: '订单信息' }, component: () => import('../views/manager/Orders') },
       { path: 'collect', name: 'Collect', meta: { name: '收藏信息' }, component: () => import('../views/manager/Collect') },
+      { path: 'comment', name: 'Comment', meta: { name: '商家评论信息' }, component: () => import('../views/manager/Comment') },
     ]
   },
   {
