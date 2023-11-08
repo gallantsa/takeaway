@@ -9,6 +9,7 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
 import com.example.service.BusinessService;
+import com.example.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -33,17 +34,23 @@ public class TokenUtils {
 
     private static BusinessService staticBusinessService;
 
+    private static UserService staticUserService;
+
     @Resource
     AdminService adminService;
 
     @Resource
     BusinessService businessService;
 
+    @Resource
+    UserService userService;
+
 
     @PostConstruct
     public void setUserService() {
         staticAdminService = adminService;
         staticBusinessService = businessService;
+        staticUserService = userService;
     }
 
     /**
@@ -70,6 +77,8 @@ public class TokenUtils {
                     return staticAdminService.selectById(Integer.valueOf(userId));
                 } else if (RoleEnum.BUSINESS.name().equals(role)) {
                     return staticBusinessService.selectById(Integer.valueOf(userId));
+                } else if (RoleEnum.USER.name().equals(role)) {
+                    return staticUserService.selectById(Integer.valueOf(userId));
                 }
             }
         } catch (Exception e) {

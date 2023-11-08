@@ -1,11 +1,14 @@
 package com.example.service;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
+import com.example.entity.Account;
 import com.example.entity.User;
 import com.example.exception.CustomException;
 import com.example.mapper.UserMapper;
+import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
@@ -90,4 +93,30 @@ public class UserService {
         return PageInfo.of(list);
     }
 
+    /**
+     * 商家登录
+     * @param account
+     * @return
+     */
+    public Account login(Account account) {
+        Account dbUser = this.selectByUsername(account.getUsername());
+        if (ObjectUtil.isNull(dbUser)) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        if (!account.getPassword().equals(dbUser.getPassword())) { // 比较输入密码和数据库密码是否相同
+            throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
+        }
+        // 生成token
+        String tokenData = dbUser.getId() + "-" + RoleEnum.USER.name();
+        String token = TokenUtils.createToken(tokenData, dbUser.getPassword());
+        dbUser.setToken(token);
+        return dbUser;
+    }
+
+    private Account selectByUsername(String username) {
+        User user = new User();
+        user.setUsername(username);
+        List<User> userList = this.selectAll(user);
+        return CollUtil.isEmpty(userList) ? null : userList.get(0);
+    }
 }

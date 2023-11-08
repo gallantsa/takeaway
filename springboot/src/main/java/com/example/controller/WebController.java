@@ -8,6 +8,7 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.service.AdminService;
 import com.example.service.BusinessService;
+import com.example.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,6 +24,9 @@ public class WebController {
 
     @Resource
     private BusinessService businessService;
+
+    @Resource
+    private UserService userService;
 
     @GetMapping("/")
     public Result hello() {
@@ -43,6 +47,8 @@ public class WebController {
             account = adminService.login(account);
         } else if (RoleEnum.BUSINESS.name().equals(account.getRole())) {
             account = businessService.login(account);
+        } else if (RoleEnum.USER.name().equals(account.getRole())) {
+            account = userService.login(account);
         }
         return Result.success(account);
     }
