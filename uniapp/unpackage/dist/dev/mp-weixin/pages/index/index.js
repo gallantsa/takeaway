@@ -158,7 +158,7 @@ var _default = {
   },
   onLoad: function onLoad() {
     // http://localhost:9090/
-    this.$request.get('/').then(function (res) {
+    this.$request.get('/banner/selectAll').then(function (res) {
       console.log(res);
     });
   },

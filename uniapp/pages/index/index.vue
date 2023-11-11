@@ -16,7 +16,7 @@
 		},
 		onLoad() {
 			// http://localhost:9090/
-			this.$request.get('/').then(res => {
+			this.$request.get('/banner/selectAll').then(res => {
 				console.log(res)
 			})
 		},

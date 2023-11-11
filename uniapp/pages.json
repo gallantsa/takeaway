@@ -29,6 +29,14 @@
 				"navigationBarTitleText" : "登 录",
 				"enablePullDownRefresh" : false
 			}
+		},
+		{
+			"path" : "pages/register/register",
+			"style" : 
+			{
+				"navigationBarTitleText" : "",
+				"enablePullDownRefresh" : false
+			}
 		}
 	],
 	"globalStyle": {

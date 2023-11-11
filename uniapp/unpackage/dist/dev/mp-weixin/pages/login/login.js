@@ -189,34 +189,78 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
       form: {
         role: 'USER'
+      },
+      rules: {
+        // 对username字段进行必填验证
+        username: {
+          // username 字段的校验规则
+          rules: [
+          // 校验 username 不能为空
+          {
+            required: true,
+            errorMessage: '请填写账号'
+          },
+          // 对username字段进行长度验证
+          {
+            minLength: 3,
+            maxLength: 10,
+            errorMessage: '账号长度在 {minLength} 到 {maxLength} 个字符'
+          }]
+        },
+        password: {
+          // password 字段的校验规则
+          rules: [
+          // 校验 password 不能为空
+          {
+            required: true,
+            errorMessage: '请填写密码'
+          },
+          // 对password字段进行长度验证
+          {
+            minLength: 3,
+            maxLength: 10,
+            errorMessage: '密码长度在 {minLength} 到 {maxLength} 个字符'
+          }]
+        }
       }
     };
   },
   methods: {
     login: function login() {
-      this.$request.post('/login', this.form).then(function (res) {
-        if (res.code === '200') {
-          uni.showToast({
-            icon: 'success',
-            title: '登录成功'
-          });
-          uni.setStorageSync('xm-user', res.data);
+      var _this = this;
+      this.$refs.form.validate().then(function (res) {
+        _this.$request.post('/login', _this.form).then(function (res) {
+          if (res.code === '200') {
+            uni.showToast({
+              icon: 'success',
+              title: '登录成功'
+            });
+            uni.setStorageSync('xm-user', res.data);
 
-          // 跳转主页
-          uni.switchTab({
-            url: '/pages/index/index'
-          });
-        } else {
-          uni.showToast({
-            icon: 'error',
-            title: res.msg
-          });
-        }
+            // 跳转主页
+            uni.switchTab({
+              url: '/pages/index/index'
+            });
+          } else {
+            uni.showToast({
+              icon: 'error',
+              title: res.msg
+            });
+          }
+        });
+      }).catch(function (err) {
+        console.log('表单错误信息：', err);
       });
     }
   }

@@ -5,12 +5,14 @@ import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.ResultCodeEnum;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.entity.Business;
 import com.example.entity.User;
 import com.example.exception.CustomException;
 import com.example.mapper.UserMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -94,7 +96,7 @@ public class UserService {
     }
 
     /**
-     * 商家登录
+     * 用户登录
      * @param account
      * @return
      */
@@ -118,5 +120,15 @@ public class UserService {
         user.setUsername(username);
         List<User> userList = this.selectAll(user);
         return CollUtil.isEmpty(userList) ? null : userList.get(0);
+    }
+
+    /**
+     * 用户注册
+     * @param account
+     */
+    public void register(Account account) {
+        User user = new User();
+        BeanUtils.copyProperties(account, user); // 拷贝账号和密码两个属性
+        this.add(user); // 添加商家账户信息
     }
 }

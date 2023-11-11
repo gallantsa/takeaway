@@ -8,6 +8,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "",
+          "pathName": "pages/register/register",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "登录",
           "pathName": "pages/login/login",
           "query": "",
