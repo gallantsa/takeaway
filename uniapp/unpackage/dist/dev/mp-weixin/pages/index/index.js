@@ -98,6 +98,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uniIcons: function () {
+      return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 93))
+    },
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function () {
   var _vm = this
   var _h = _vm.$createElement
@@ -150,19 +173,119 @@ exports.default = void 0;
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default = {
   data: function data() {
     return {
-      title: 'Hello 青哥哥'
+      banners: [],
+      noticeList: [],
+      notice: '',
+      businessList: []
     };
   },
   onLoad: function onLoad() {
-    // http://localhost:9090/
-    this.$request.get('/banner/selectAll').then(function (res) {
-      console.log(res);
-    });
+    this.load();
   },
-  methods: {}
+  methods: {
+    load: function load() {
+      var _this = this;
+      // 获取轮播图数据
+      this.$request.get('/banner/selectAll').then(function (res) {
+        _this.banners = res.data || [];
+      });
+
+      // 获取公告数据 
+      this.$request.get('/notice/selectAll').then(function (res) {
+        _this.noticeList = res.data || [];
+        if (_this.noticeList.length) {
+          var i = 0;
+          _this.notice = _this.noticeList[i++].content;
+          if (_this.noticeList.length > 1) {
+            setInterval(function () {
+              if (i === _this.noticeList.length) {
+                i = 0;
+              }
+              _this.notice = _this.noticeList[i++].content;
+            }, 3000);
+          }
+        }
+      });
+
+      // 获取商家的列表
+      this.$request.get('/business/selectAll', {
+        data: {
+          status: '通过'
+        }
+      }).then(function (res) {
+        _this.businessList = res.data || [];
+      });
+    }
+  }
 };
 exports.default = _default;
 

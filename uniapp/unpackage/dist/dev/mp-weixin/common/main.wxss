@@ -22,3 +22,10 @@ page {
 	font-size: 28rpx;
 	color: #333;
 }
+
+.box {
+	background-color: #fff;
+	padding: 20rpx;
+	border-radius: 10rpx;
+	box-shadow: 0 4rpx 20rpx rgba(0, 0, 0, .1);
+}
