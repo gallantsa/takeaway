@@ -44,7 +44,7 @@
 
 			<view>
 				<view class="box" v-for="item in businessList" :key="item.id"
-					style="display: flex; grid-gap: 30rpx; margin-bottom: 10rpx;">
+					style="display: flex; grid-gap: 30rpx; margin-bottom: 10rpx;" @click="goToDetail(item.id)">
 					<view style="width: 30%;">
 						<image :src="item.avatar"
 							style="width: 100%; height: 200rpx; border-radius: 10rpx; display: block;"></image>
@@ -87,6 +87,11 @@
 			this.load()
 		},
 		methods: {
+			goToDetail(businessId) {
+				uni.navigateTo({
+					url: '/pages/detail/detail?businessId=' + businessId
+				})
+			},
 			load() {
 				// 获取轮播图数据
 				this.$request.get('/banner/selectAll').then(res => {
@@ -112,9 +117,7 @@
 
 				// 获取商家的列表
 				this.$request.get('/business/selectAll', {
-					data: {
-						status: '通过'
-					}
+					status: '通过'
 				}).then(res => {
 					this.businessList = res.data || []
 				})
