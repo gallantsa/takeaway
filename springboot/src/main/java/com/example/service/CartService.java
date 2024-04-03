@@ -1,6 +1,7 @@
 package com.example.service;
 
 import com.example.entity.AmountDTO;
+import com.example.entity.Business;
 import com.example.entity.Cart;
 import com.example.entity.Goods;
 import com.example.mapper.CartMapper;
@@ -23,6 +24,9 @@ public class CartService {
 
     @Resource
     private GoodsService goodsService;
+
+    @Resource
+    private BusinessService businessService;
 
     /**
      * 新增
@@ -70,6 +74,9 @@ public class CartService {
         for (Cart c : cartList) {
             Goods goods = goodsService.selectById(c.getGoodsId());
             c.setGoods(goods);
+            // 查询商家信息
+            Business business = businessService.selectById(goods.getBusinessId());
+            c.setBusiness(business);
         }
         return cartList;
     }

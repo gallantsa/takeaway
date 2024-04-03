@@ -13,6 +13,16 @@ public class Cart {
 
     private Goods goods;
 
+    private Business business;
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+
     public Goods getGoods() {
         return goods;
     }

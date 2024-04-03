@@ -133,7 +133,7 @@
 					info: 0
 				}],
 				buttonGroup: [{
-					text: '立即购买',
+					text: '立即下单',
 					backgroundColor: 'linear-gradient(90deg, #FE6035, #EF1224)',
 					color: '#fff'
 				}],
@@ -148,6 +148,11 @@
 			this.loadCart()
 		},
 		methods: {
+			buttonClick() {
+				uni.navigateTo({
+					url: '/pages/confirm/confirm?businessId=' + this.businessId
+				})
+			},
 			deleteAll() {
 				this.$request.del('/cart/deleteByBusiness/' + this.businessId + '/' + this.user.id).then(res => {
 					if (res.code === '200') {
@@ -182,7 +187,8 @@
 			},
 			loadCart() {
 				this.$request.get('/cart/selectAll', {
-					userId: this.user.id
+					userId: this.user.id,
+					businessId: this.businessId
 				}).then(res => {
 					this.cartList = res.data || []
 					this.options[0].info = this.cartList.length

@@ -30,7 +30,7 @@
 		{
 			"path": "pages/register/register",
 			"style": {
-				"navigationBarTitleText": "",
+				"navigationBarTitleText": "注 册",
 				"enablePullDownRefresh": false
 			}
 		},
@@ -38,6 +38,20 @@
 			"path": "pages/detail/detail",
 			"style": {
 				"navigationBarTitleText": "商 家",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/confirm/confirm",
+			"style": {
+				"navigationBarTitleText": "确认订单",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/orderComment/orderComment",
+			"style": {
+				"navigationBarTitleText": "订单备注",
 				"enablePullDownRefresh": false
 			}
 		}
