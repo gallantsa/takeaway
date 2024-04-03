@@ -5,10 +5,26 @@
 			<text style="font-size: 24rpx; margin-left: 5rpx; color: orange;">温馨提示：请适量点餐，避免浪费</text>
 		</view>
 
-		<view class="box" style="margin: 20rpx 0;">
-			<uni-icons type="plus" size="18" style="position: relative; top: 4rpx;" color="dodgerblue"></uni-icons>
-			<text style="margin-left: 5rpx; color: dodgerblue;">请添加收货地址</text>
-		</view>
+		<navigator url="/pages/address/address" class="box" style="margin: 20rpx 0;">
+			<view v-if="addressId">
+				<view style="margin-bottom: 10rpx; display: flex;">
+					<view style="flex: 1;">{{ address.address }}</view>
+					<uni-icons type="right" color="#666"></uni-icons>
+				</view>
+				<view style="color: #888; margin-bottom: 20rpx;">
+					<text>{{ address.user }}</text>
+					<text style="margin-left: 20rpx;">{{ address.phone }}</text>
+				</view>
+				<view style="display: flex;">
+					<view style="flex: 1; font-weight: bold;">平台配送</view>
+					<view style="flex: 1; color: dodgerblue; text-align: right;">30分钟送达</view>
+				</view>
+			</view>
+			<view v-else>
+				<uni-icons type="plus" size="18" style="position: relative; top: 4rpx;" color="dodgerblue"></uni-icons>
+				<text style="margin-left: 5rpx; color: dodgerblue;">请添加收货地址</text>
+			</view>
+		</navigator>
 
 		<!-- 购物车商品和金额信息 -->
 		<view class="box" style="margin: 20rpx 0;">
@@ -55,7 +71,9 @@
 			<view style="display: flex; margin-bottom: 10rpx;">
 				<view style="flex: 1; font-weight: bold;">备注</view>
 				<navigator url="/pages/orderComment/orderComment" style="flex: 1; text-align: right; color: #999;">
-					填写口味偏好 <uni-icons type="right" color="#999" style="position: relative; top: 2rpx;"></uni-icons>
+					<text v-if="comment">{{ comment }}</text>
+					<text v-else>请填写口味偏好</text>
+					<uni-icons type="right" color="#999" style="position: relative; top: 2rpx;"></uni-icons>
 				</navigator>
 			</view>
 		</view>
@@ -86,10 +104,13 @@
 		data() {
 			return {
 				businessId: 0,
+				addressId: 0,
+				comment: '',
 				user: uni.getStorageSync('xm-user'),
 				cartList: [],
 				amount: {},
 				business: {},
+				address: {},
 				orders: {
 					payType: '支付宝'
 				},
@@ -104,11 +125,21 @@
 				]
 			}
 		},
-		onLoad(option) {
-			this.businessId = option.businessId
+		onShow() {
+			// 获取缓存的数据
+			let xmOrders = uni.getStorageSync('xm-orders')
+			this.businessId = xmOrders.businessId || 0
+			this.addressId = xmOrders.addressId || 0
+			this.comment = xmOrders.comment || ''
 			this.loadCart()
+			this.loadAddress()
 		},
 		methods: {
+			loadAddress() {
+				this.$request.get('/address/selectById/' + this.addressId).then(res => {
+					this.address = res.data || {}
+				})
+			},
 			loadCart() {
 				this.$request.get('/cart/selectAll', {
 					userId: this.user.id,

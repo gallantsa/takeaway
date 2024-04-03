@@ -149,8 +149,11 @@
 		},
 		methods: {
 			buttonClick() {
+				let xmOrders = uni.getStorageSync('xm-orders') || {}
+				xmOrders.businessId = this.businessId
+				uni.setStorageSync('xm-orders', xmOrders)
 				uni.navigateTo({
-					url: '/pages/confirm/confirm?businessId=' + this.businessId
+					url: '/pages/confirm/confirm'
 				})
 			},
 			deleteAll() {

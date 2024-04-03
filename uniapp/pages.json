@@ -54,6 +54,20 @@
 				"navigationBarTitleText": "订单备注",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/address/address",
+			"style": {
+				"navigationBarTitleText": "收货地址",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/addAddress/addAddress",
+			"style": {
+				"navigationBarTitleText": "新增收货地址",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"globalStyle": {
