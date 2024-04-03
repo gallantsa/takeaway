@@ -1,17 +1,18 @@
 {
-  "id": "uni-icons",
-  "displayName": "uni-icons 图标",
-  "version": "2.0.9",
-  "description": "图标组件，用于展示移动端常见的图标，可自定义颜色、大小。",
+  "id": "uni-transition",
+  "displayName": "uni-transition 过渡动画",
+  "version": "1.3.2",
+  "description": "元素的简单过渡动画",
   "keywords": [
     "uni-ui",
     "uniui",
-    "icon",
-    "图标"
+    "动画",
+    "过渡",
+    "过渡动画"
 ],
   "repository": "https://github.com/dcloudio/uni-ui",
   "engines": {
-    "HBuilderX": "^3.2.14"
+    "HBuilderX": ""
   },
   "directories": {
     "example": "../../temps/example_temps"
@@ -47,8 +48,7 @@
       "client": {
         "App": {
           "app-vue": "y",
-          "app-nvue": "y",
-          "app-uvue": "y"
+          "app-nvue": "y"
         },
         "H5-mobile": {
           "Safari": "y",
@@ -68,15 +68,11 @@
           "阿里": "y",
           "百度": "y",
           "字节跳动": "y",
-          "QQ": "y",
-					"钉钉": "y",
-					"快手": "y",
-					"飞书": "y",
-					"京东": "y"
+          "QQ": "y"
         },
         "快应用": {
-          "华为": "y",
-          "联盟": "y"
+          "华为": "u",
+          "联盟": "u"
         },
         "Vue": {
             "vue2": "y",

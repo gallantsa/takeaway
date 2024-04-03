@@ -12,12 +12,23 @@ public class Goods {
     private String name;
     /** 价格 */
     private BigDecimal price;
+    /** 打折后的价格 */
+    private BigDecimal actualPrice;
     /** 图片 */
     private String img;
     /** 描述 */
     private String descr;
     /** 原材料 */
     private String origin;
+
+    public BigDecimal getActualPrice() {
+        return actualPrice;
+    }
+
+    public void setActualPrice(BigDecimal actualPrice) {
+        this.actualPrice = actualPrice;
+    }
+
     /** 口味 */
     private String taste;
     /** 规格 */
