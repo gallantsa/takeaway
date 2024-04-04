@@ -82,6 +82,16 @@ public class CartService {
     }
 
     /**
+     * 查询出用户在某商家的所有购物商品信息
+     */
+    public List<Cart> selectUserCart(Integer id, Integer businessId) {
+        Cart cart = new Cart();
+        cart.setUserId(id);
+        cart.setBusinessId(businessId);
+        return this.selectAll(cart);
+    }
+
+    /**
      * 分页查询
      */
     public PageInfo<Cart> selectPage(Cart cart, Integer pageNum, Integer pageSize) {

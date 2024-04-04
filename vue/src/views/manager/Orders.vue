@@ -24,6 +24,7 @@
             <el-tag type="primary" v-if="scope.row.status === '待收货'">待收货</el-tag>
             <el-tag type="info" v-if="scope.row.status === '待评价'">待评价</el-tag>
             <el-tag type="success" v-if="scope.row.status === '已完成'">已完成</el-tag>
+            <el-tag type="warning" v-if="scope.row.status === '已退款'">已退款</el-tag>
           </template>
         </el-table-column>
         <el-table-column prop="businessName" label="接单商家"></el-table-column>

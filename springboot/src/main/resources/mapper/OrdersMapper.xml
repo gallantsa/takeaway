@@ -21,6 +21,21 @@
             <if test="orderNo != null">and orders.order_no like concat('%', #{orderNo}, '%')</if>
             <if test="businessId != null">and orders.business_id = #{businessId}</if>
             <if test="userId != null">and orders.user_id = #{userId}</if>
+            <choose>
+                <when test="status == '全部'"></when>
+                <when test="status == '进行中'">
+                    and (orders.status = '待支付' or orders.status = '待发货' or orders.status = '待收货')
+                </when>
+                <when test="status == '待评价'">
+                    and orders.status = '待评价'
+                </when>
+                <when test="status == '已退款'">
+                    and orders.status = '已退款'
+                </when>
+                <when test="status != null">
+                    and orders.status = #{status}
+                </when>
+            </choose>
         </where>
         order by id desc
     </select>

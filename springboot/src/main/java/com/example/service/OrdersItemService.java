@@ -6,6 +6,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 /**
@@ -30,6 +32,7 @@ public class OrdersItemService {
     /**
      * 删除
      */
+    @Transactional
     public void deleteById(Integer id) {
         ordersItemMapper.deleteById(id);
     }
@@ -37,9 +40,10 @@ public class OrdersItemService {
     /**
      * 批量删除
      */
+    @Transactional
     public void deleteBatch(List<Integer> ids) {
         for (Integer id : ids) {
-            ordersItemMapper.deleteById(id);
+            this.deleteById(id);
         }
     }
 
@@ -73,4 +77,7 @@ public class OrdersItemService {
         return PageInfo.of(list);
     }
 
+    public void deleteByOrderId(Integer orderId) {
+        ordersItemMapper.deleteByOrderId(orderId);
+    }
 }

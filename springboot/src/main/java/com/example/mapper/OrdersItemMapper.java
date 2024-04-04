@@ -35,4 +35,9 @@ public interface OrdersItemMapper {
     */
     List<OrdersItem> selectAll(OrdersItem ordersItem);
 
+    /**
+      * 根据订单ID删除
+    */
+    @Delete("delete from orders_item where order_id = #{orderId}")
+    void deleteByOrderId(Integer orderId);
 }

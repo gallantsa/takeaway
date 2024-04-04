@@ -80,18 +80,19 @@
 		<!-- 商家承诺 -->
 
 		<view class="box" style="margin-bottom: 110rpx;">
-			<uni-data-checkbox v-model="orders.payType" :localdata="range"></uni-data-checkbox>
+			<uni-data-checkbox v-model="payType" :localdata="range"></uni-data-checkbox>
 		</view>
 
 		<!-- 提交按钮 -->
-		<view v-if="amount.discount" class="box" style="position: fixed; bottom: 0; width: 100%; left: -40rpx;">
+		<view class="box" style="position: fixed; bottom: 0; width: 100%; left: -40rpx;">
 			<view style="text-align: right;">
 				<text>已优惠</text>
 				<text style="color: red;">￥{{ amount.discount }}</text>
 				<text style="margin-left: 20rpx;">小计</text>
 				<text style="color: red; font-size: 36rpx; font-weight: bold;">￥{{ amount.actual }}</text>
 				<button size="mini" type="primary" style="margin-left: 20rpx; 
-					background-color: dodgerblue; border-color: dodgerblue; position: relative; top: 6rpx;">提交订单</button>
+					background-color: dodgerblue; border-color: dodgerblue; position: relative; top: 6rpx;"
+					@click="addOrder">提交订单</button>
 			</view>
 		</view>
 		<!-- 提交按钮 -->
@@ -111,9 +112,7 @@
 				amount: {},
 				business: {},
 				address: {},
-				orders: {
-					payType: '支付宝'
-				},
+				payType: '支付宝',
 				range: [{
 						"value": '支付宝',
 						"text": "支付宝"
@@ -135,6 +134,42 @@
 			this.loadAddress()
 		},
 		methods: {
+			addOrder() {
+				if (!this.addressId) {
+					uni.showToast({
+						icon: 'error',
+						title: '请选择收货地址'
+					})
+					return
+				}
+				let form = {
+					businessId: this.businessId,
+					comment: this.comment,
+					user: this.address.user,
+					address: this.address.address,
+					phone: this.address.phone,
+					payType: this.payType
+				}
+				this.$request.post('/orders/addOrder', form).then(res => {
+					if (res.code === '200') {
+						uni.removeStorageSync('xm-orders')
+						uni.showToast({
+							icon: "success",
+							title: '操作成功'
+						})
+						setTimeout(() => {
+							uni.switchTab({
+								url: '/pages/orders/orders'
+							})
+						}, 500)
+					} else {
+						uni.showToast({
+							icon: "error",
+							title: res.msg
+						})
+					}
+				})
+			},
 			loadAddress() {
 				this.$request.get('/address/selectById/' + this.addressId).then(res => {
 					this.address = res.data || {}

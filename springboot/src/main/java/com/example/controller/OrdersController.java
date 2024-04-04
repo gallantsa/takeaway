@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.example.common.Result;
 import com.example.entity.Orders;
+import com.example.entity.OrdersDTO;
 import com.example.service.OrdersService;
 import com.github.pagehelper.PageInfo;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,12 @@ public class OrdersController {
     @PostMapping("/add")
     public Result add(@RequestBody Orders orders) {
         ordersService.add(orders);
+        return Result.success();
+    }
+
+    @PostMapping("/addOrder")
+    public Result addOrder(@RequestBody OrdersDTO orders) {
+        ordersService.addOrder(orders);
         return Result.success();
     }
 
@@ -68,7 +75,7 @@ public class OrdersController {
      * 查询所有
      */
     @GetMapping("/selectAll")
-    public Result selectAll(Orders orders ) {
+    public Result selectAll(Orders orders) {
         List<Orders> list = ordersService.selectAll(orders);
         return Result.success(list);
     }
