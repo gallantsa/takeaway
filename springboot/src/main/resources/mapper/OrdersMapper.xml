@@ -42,8 +42,12 @@
 
     <select id="selectById" resultType="com.example.entity.Orders">
         select
-            *
+            orders.*, business.name as business_name, user.name as user_name
         from orders
+            left join business
+                on orders.business_id = business.id
+            left join user
+                on orders.user_id = user.id
         where orders.id = #{id}
     </select>
 
