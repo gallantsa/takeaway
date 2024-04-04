@@ -28,6 +28,16 @@ public class Comment implements Serializable {
     private String businessName;
     /** 订单编号 */
     private String orderNo;
+    /** 用户头像 */
+    private String userAvatar;
+
+     public String getUserAvatar() {
+        return userAvatar;
+     }
+
+    public void setUserAvatar(String userAvatar) {
+        this.userAvatar = userAvatar;
+    }
 
     public String getUserName() {
         return userName;

@@ -82,7 +82,7 @@ public class CollectService {
         // 拿到当前登录的用户信息
         Account currentUser = TokenUtils.getCurrentUser();
         String role = currentUser.getRole();
-        if (RoleEnum.BUSINESS.name().equals(role)) { // 如果当前登录的用户是商家, 则只能查询自己的信息
+        if (RoleEnum.BUSINESS.name().equals(role)) { // 如果当前登录的用户是商 家, 则只能查询自己的信息
             collect.setBusinessId(currentUser.getId()); // 设置商家自己的id作为查询条件
         }
         PageHelper.startPage(pageNum, pageSize);
