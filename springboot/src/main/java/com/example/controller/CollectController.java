@@ -28,6 +28,12 @@ public class CollectController {
         return Result.success();
     }
 
+    @PostMapping("/saveCollect")
+    public Result saveCollect(@RequestBody Collect collect) {
+        collectService.saveCollect(collect);
+        return Result.success();
+    }
+
     /**
      * 删除
      */

@@ -22,6 +22,16 @@ public class Collect implements Serializable {
     /** 用户名称 */
     private String userName;
 
+    private Business business;
+
+    public Business getBusiness() {
+        return business;
+    }
+
+    public void setBusiness(Business business) {
+        this.business = business;
+    }
+
     public String getBusinessName() {
         return businessName;
     }

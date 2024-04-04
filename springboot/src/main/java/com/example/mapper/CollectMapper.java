@@ -1,6 +1,8 @@
 package com.example.mapper;
 
 import com.example.entity.Collect;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -34,4 +36,9 @@ public interface CollectMapper {
      */
     List<Collect> selectAll(Collect collect);
 
+    /**
+     * 根据用户ID和商家ID查询
+     */
+    @Select("select * from collect where user_id = #{userId} and business_id = #{businessId}")
+    Collect selectByUserIdAndBusinessId(@Param("userId") Integer userId, @Param("businessId") Integer businessId);
 }

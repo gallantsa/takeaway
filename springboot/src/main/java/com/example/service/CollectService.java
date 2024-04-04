@@ -1,7 +1,9 @@
 package com.example.service;
 
+import cn.hutool.core.date.DateUtil;
 import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
+import com.example.entity.Business;
 import com.example.entity.Collect;
 import com.example.mapper.CollectMapper;
 import com.example.utils.TokenUtils;
@@ -20,6 +22,9 @@ public class CollectService {
 
     @Resource
     private CollectMapper collectMapper;
+
+    @Resource
+    private BusinessService businessService;
 
     /**
      * 新增
@@ -62,7 +67,12 @@ public class CollectService {
      * 查询所有
      */
     public List<Collect> selectAll(Collect collect) {
-        return collectMapper.selectAll(collect);
+        List<Collect> collects = collectMapper.selectAll(collect);
+        for (Collect c : collects) {
+            Business business = businessService.selectById(c.getBusinessId());
+            c.setBusiness(business);
+        }
+        return collects;
     }
 
     /**
@@ -80,4 +90,20 @@ public class CollectService {
         return PageInfo.of(list);
     }
 
+    public Collect selectByUserIdAndBusinessId(Integer userId, Integer businessId) {
+        return collectMapper.selectByUserIdAndBusinessId(userId, businessId);
+    }
+
+    public void saveCollect(Collect collect) {
+        Collect dbCollect = this.selectByUserIdAndBusinessId(collect.getUserId(), collect.getBusinessId());
+        // 说明收藏过了
+        if (dbCollect != null) {
+            //删除收藏
+            this.deleteById(dbCollect.getId());
+        } else {
+            // 新的收藏
+            collect.setTime(DateUtil.now());
+            this.add(collect);
+        }
+    }
 }

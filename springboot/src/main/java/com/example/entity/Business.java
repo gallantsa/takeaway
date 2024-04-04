@@ -70,6 +70,18 @@ public class Business extends Account {
      */
     private String type;
 
+    /**
+     * 是否收藏
+     */
+    private Boolean isCollect;
+
+    public Boolean getIsCollect() {
+        return isCollect;
+    }
+
+    public void setIsCollect(Boolean isCollect) {
+        this.isCollect = isCollect;
+    }
     public Integer getId() {
         return id;
     }

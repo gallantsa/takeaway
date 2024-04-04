@@ -6,6 +6,7 @@ import com.example.common.enums.RoleEnum;
 import com.example.entity.Account;
 import com.example.entity.Admin;
 import com.example.entity.Business;
+import com.example.entity.Collect;
 import com.example.exception.CustomException;
 import com.example.mapper.BusinessMapper;
 import com.example.utils.TokenUtils;
@@ -28,8 +29,12 @@ public class BusinessService {
     @Resource
     private BusinessMapper businessMapper;
 
+    @Resource
+    private CollectService collectService;
+
     /**
      * 新增商家
+     *
      * @param business
      */
     public void add(Business business) {
@@ -46,6 +51,7 @@ public class BusinessService {
 
     /**
      * 删除商家
+     *
      * @param id
      */
     public void deleteById(Integer id) {
@@ -54,6 +60,7 @@ public class BusinessService {
 
     /**
      * 批量删除商家
+     *
      * @param ids
      */
     public void deleteBatch(List<Integer> ids) {
@@ -64,6 +71,7 @@ public class BusinessService {
 
     /**
      * 修改商家
+     *
      * @param business
      */
     public void updateById(Business business) {
@@ -86,6 +94,7 @@ public class BusinessService {
 
     /**
      * 查询商家列表
+     *
      * @param business
      * @return
      */
@@ -96,6 +105,7 @@ public class BusinessService {
 
     /**
      * 根据账号查询
+     *
      * @param username
      * @return
      */
@@ -109,6 +119,7 @@ public class BusinessService {
 
     /**
      * 根据id查询
+     *
      * @param id
      * @return
      */
@@ -116,11 +127,18 @@ public class BusinessService {
         Business params = new Business();
         params.setId(id);
         List<Business> list = this.selectAll(params);
-        return list.size() == 0 ? null : list.get(0);
+        Business business = list.size() == 0 ? null : list.get(0);
+        if (business != null) {
+            Account currentUser = TokenUtils.getCurrentUser();
+            Collect collect = collectService.selectByUserIdAndBusinessId(currentUser.getId(), business.getId());
+            business.setIsCollect(collect != null);
+        }
+        return business;
     }
 
     /**
      * 分页查询商家列表
+     *
      * @param business
      * @param pageNum
      * @param pageSize
@@ -134,6 +152,7 @@ public class BusinessService {
 
     /**
      * 商家注册
+     *
      * @param account
      */
     public void register(Account account) {
@@ -147,6 +166,7 @@ public class BusinessService {
 
     /**
      * 商家登录
+     *
      * @param account
      * @return
      */
@@ -167,6 +187,7 @@ public class BusinessService {
 
     /**
      * 修改密码
+     *
      * @param account
      */
     public void updatePassword(Account account) {
