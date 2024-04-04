@@ -7,7 +7,7 @@ public enum OrderStatusEnum {
     NO_RECEIVE("待收货"),
     NO_COMMENT("待评价"),
     MONEY_BACK("已退款"),
-    DEON("已完成");
+    DONE("已完成");
 
     private String value;
 

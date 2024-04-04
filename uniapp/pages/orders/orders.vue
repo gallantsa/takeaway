@@ -38,7 +38,8 @@
 							@click="changeStatus(item, '已退款')"></uni-tag>
 						<uni-tag v-if="item.status === '待收货'" text="确认收货" size="mini" type="warning"
 							@click="changeStatus(item, '待评价')"></uni-tag>
-						<uni-tag v-if="item.status === '待评价'" text="评价" size="mini" type="royal"></uni-tag>
+						<uni-tag v-if="item.status === '待评价'" text="评价" size="mini" type="royal"
+							@click="goComment(item.id)"></uni-tag>
 					</view>
 				</view>
 			</view>
@@ -60,6 +61,11 @@
 			this.loadOrders()
 		},
 		methods: {
+			goComment(orderId) {
+				uni.navigateTo({
+					url: '/pages/comment/comment?orderId=' + orderId
+				})
+			},
 			goOrdersItem(orderId) {
 				uni.navigateTo({
 					url: '/pages/ordersItem/ordersItem?orderId=' + orderId

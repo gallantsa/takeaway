@@ -5,7 +5,7 @@
 <mapper namespace="com.example.mapper.CommentMapper">
 
     <sql id="Base_Column_List">
-        id,content,star,user_id,business_id,goods_id,order_id,time
+        id,content,star,user_id,business_id,order_id,time
     </sql>
 
     <select id="selectAll" resultType="com.example.entity.Comment">
@@ -48,7 +48,6 @@
             <if test="star != null">star,</if>
             <if test="userId != null">user_id,</if>
             <if test="businessId != null">business_id,</if>
-            <if test="goodsId != null">goods_id,</if>
             <if test="orderId != null">order_id,</if>
             <if test="time != null">time,</if>
         </trim>
@@ -58,7 +57,6 @@
             <if test="star != null">#{star},</if>
             <if test="userId != null">#{userId},</if>
             <if test="businessId != null">#{businessId},</if>
-            <if test="goodsId != null">#{goodsId},</if>
             <if test="orderId != null">#{orderId},</if>
             <if test="time != null">#{time},</if>
         </trim>
@@ -78,9 +76,6 @@
             </if>
             <if test="businessId != null">
                 business_id = #{businessId},
-            </if>
-            <if test="goodsId != null">
-                goods_id = #{goodsId},
             </if>
             <if test="orderId != null">
                 order_id = #{orderId},
