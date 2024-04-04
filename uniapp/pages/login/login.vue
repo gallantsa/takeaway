@@ -8,7 +8,7 @@
 					<uni-easyinput prefixIcon="person" v-model="form.username" placeholder="请输入账号" />
 				</uni-forms-item>
 				<uni-forms-item name="password" required>
-					<uni-easyinput prefixIcon="locked" v-model="form.password" placeholder="请输入密码" />
+					<uni-easyinput type="password" prefixIcon="locked" v-model="form.password" placeholder="请输入密码" />
 				</uni-forms-item>
 				<uni-forms-item>
 					<button @click="login()"
