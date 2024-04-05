@@ -87,7 +87,7 @@
 				businessList: []
 			}
 		},
-		onLoad() {
+		onShow() {
 			this.load()
 		},
 		methods: {
