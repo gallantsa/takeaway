@@ -65,7 +65,7 @@
 								<view style="font-size: 24rpx;">{{ item.descr }}</view>
 								<view>
 									<text class="mini-btn">{{ item.discount }}折</text>
-									<text style="font-size: 24rpx; margin-left: 10rpx;">已售 30</text>
+									<text style="font-size: 24rpx; margin-left: 10rpx;">已售 {{ item.saleCount }}</text>
 								</view>
 								<view>
 									<text style="text-decoration: line-through;">￥{{ item.price }}</text>

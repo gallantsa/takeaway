@@ -2,18 +2,18 @@ package com.example.service;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.example.common.enums.RoleEnum;
-import com.example.entity.Account;
-import com.example.entity.Category;
-import com.example.entity.Goods;
+import com.example.entity.*;
 import com.example.mapper.GoodsMapper;
 import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.stereotype.Service;
+import com.example.common.enums.OrderStatusEnum;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +30,12 @@ public class GoodsService {
 
     @Resource
     private CategoryService categoryService;
+
+    @Resource
+    private OrdersItemService ordersItemService;
+
+    @Resource
+    private OrdersService ordersService;
 
     /**
      * 新增
@@ -126,6 +132,26 @@ public class GoodsService {
         if (goods == null) return null;
         BigDecimal actualPrice = goods.getPrice().multiply(BigDecimal.valueOf(goods.getDiscount())).setScale(2, RoundingMode.UP);
         goods.setActualPrice(actualPrice);
+
+        List<OrdersItem> ordersItemList = ordersItemService.selectByGoodsId(goods.getId());
+        List<OrdersItem> usageOrdersItemList = new ArrayList<>();
+        for (OrdersItem ordersItem : ordersItemList) {
+            // 筛选出有效订单的商品
+            Integer orderId = ordersItem.getOrderId();
+            Orders orders = ordersService.selectById(orderId);
+            if (orders == null) {
+                continue;
+            }
+            if (OrderStatusEnum.NO_COMMENT.getValue().equals(orders.getStatus()) || OrderStatusEnum.DONE.getValue().equals(orders.getStatus())) {
+                usageOrdersItemList.add(ordersItem);
+            }
+        }
+
+        int saleCount = 0;
+        for (OrdersItem ordersItem : usageOrdersItemList) {
+            saleCount += ordersItem.getNum();
+        }
+        goods.setSaleCount(saleCount);
         return goods;
     }
 

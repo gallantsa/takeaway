@@ -4,7 +4,7 @@
 		<swiper circular autoplay :interval="3000" :duration="500" indicator-dots style="height: 350rpx;"
 			indicator-color="rgba(255, 255, 255, 0.6)" indicator-active-color="#3CB371">
 			<swiper-item v-for="item in banners" :key="item.id">
-				<navigator>
+				<navigator :url="'/pages/detail/detail?businessId=' + item.businessId">
 					<image :src="item.img" alt="" mode="widthFix" style="width: 100%;" />
 				</navigator>
 			</swiper-item>
@@ -19,19 +19,19 @@
 			<!-- 商家分类 -->
 			<view class="box" style="margin: 20rpx 0;">
 				<view style="display: flex;">
-					<view class="category-item">
+					<view class="category-item" @click="goBusiness('奶茶饮品')">
 						<image src="@/static/imgs/咖啡.png" mode="widthFix" style="width: 50%;"></image>
 						<text>奶茶饮品</text>
 					</view>
-					<view class="category-item">
+					<view class="category-item" @click="goBusiness('轻食简餐')">
 						<image src="@/static/imgs/轻食.png" mode="widthFix" style="width: 50%;"></image>
 						<text>轻食简餐</text>
 					</view>
-					<view class="category-item">
+					<view class="category-item" @click="goBusiness('炸鸡汉堡')">
 						<image src="@/static/imgs/汉堡.png" mode="widthFix" style="width: 50%;"></image>
 						<text>炸鸡汉堡</text>
 					</view>
-					<view class="category-item">
+					<view class="category-item" @click="goBusiness('特色美味')">
 						<image src="@/static/imgs/美食.png" mode="widthFix" style="width: 50%;"></image>
 						<text>特色美味</text>
 					</view>
@@ -75,6 +75,9 @@
 </template>
 
 <script>
+	import {
+		type
+	} from 'os'
 	export default {
 		data() {
 			return {
@@ -88,6 +91,11 @@
 			this.load()
 		},
 		methods: {
+			goBusiness(type) {
+				uni.navigateTo({
+					url: '/pages/categoryBusiness/categoryBusiness?type=' + type
+				})
+			},
 			search(res) {
 				let value = res.value
 				uni.navigateTo({

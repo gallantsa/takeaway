@@ -86,4 +86,10 @@ public class OrdersItemService {
         ordersItem.setOrderId(orderId);
         return ordersItemMapper.selectAll(ordersItem);
     }
+
+    public List<OrdersItem> selectByGoodsId(Integer goodsId) {
+        OrdersItem ordersItem = new OrdersItem();
+        ordersItem.setGoodsId(goodsId);
+        return ordersItemMapper.selectAll(ordersItem);
+    }
 }

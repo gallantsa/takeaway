@@ -21,6 +21,7 @@ public class Goods {
     /** 原材料 */
     private String origin;
 
+
     public BigDecimal getActualPrice() {
         return actualPrice;
     }
@@ -48,6 +49,15 @@ public class Goods {
 
     private String categoryName;
 
+    private Integer saleCount;
+
+    public Integer getSaleCount() {
+        return saleCount;
+    }
+
+    public void setSaleCount(Integer saleCount) {
+        this.saleCount = saleCount;
+    }
 
     public String getBusinessName() {
         return businessName;

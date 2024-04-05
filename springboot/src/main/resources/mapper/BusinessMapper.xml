@@ -60,20 +60,23 @@
 
     <select id="selectAll" parameterType="com.example.entity.Business" resultType="com.example.entity.Business">
         select * from business
-         <where>
-             <if test="id != null">
+        <where>
+            <if test="id != null">
                 and id = #{id}
-             </if>
-             <if test="username != null">
-                 and username = #{username}
-             </if>
-             <if test="name != null">
-                 and name like concat('%',#{name},'%')
-             </if>
-             <if test="status != null">
-                 and status = #{status}
-             </if>
-         </where>
-         order by id desc
+            </if>
+            <if test="username != null">
+                and username = #{username}
+            </if>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+        </where>
+        order by id desc
     </select>
 </mapper>
