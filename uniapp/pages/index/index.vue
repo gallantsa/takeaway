@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<uni-search-bar @confirm="search" placeholder="搜索商家"></uni-search-bar>
 		<swiper circular autoplay :interval="3000" :duration="500" indicator-dots style="height: 350rpx;"
 			indicator-color="rgba(255, 255, 255, 0.6)" indicator-active-color="#3CB371">
 			<swiper-item v-for="item in banners" :key="item.id">
@@ -87,6 +88,12 @@
 			this.load()
 		},
 		methods: {
+			search(res) {
+				let value = res.value
+				uni.navigateTo({
+					url: '/pages/search/search?name=' + value
+				})
+			},
 			goToDetail(businessId) {
 				uni.navigateTo({
 					url: '/pages/detail/detail?businessId=' + businessId
@@ -134,5 +141,9 @@
 		justify-content: space-between;
 		align-items: center;
 		grid-gap: 10rpx;
+	}
+
+	.uni-search-bar {
+		padding: 10rpx !important;
 	}
 </style>
