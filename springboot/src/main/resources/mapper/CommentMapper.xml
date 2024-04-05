@@ -24,6 +24,7 @@
             <if test="userName != null"> and user.name like concat('%', #{userName}, '%')</if>
             <if test="orderNo != null"> and orders.order_no =  #{orderNo}</if>
             <if test="businessId != null"> and comment.business_id =  #{businessId}</if>
+            <if test="userId != null"> and comment.user_id =  #{userId}</if>
         </where>
         order by id desc
     </select>
