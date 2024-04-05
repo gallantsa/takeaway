@@ -129,22 +129,29 @@ public class BusinessService {
 
 
     /**
-     * 根据id查询
-     *
-     * @param id
-     * @return
+     * 根据ID查询
      */
     public Business selectById(Integer id) {
-        Business params = new Business();
-        params.setId(id);
-        List<Business> list = this.selectAll(params);
-        Business business = list.size() == 0 ? null : list.get(0);
+        Business business = this.selectBasicBusinessById(id);
         if (business != null) {
             Account currentUser = TokenUtils.getCurrentUser();
-            Collect collect = collectService.selectByUserIdAndBusinessId(currentUser.getId(), business.getId());
+            Collect collect = collectService.selectByUserIdAndBusinessId(currentUser.getId(), id);
             business.setIsCollect(collect != null);
         }
         return business;
+    }
+
+    /**
+     * 查询基础的商家信息
+     *
+     * @param id 商家id
+     * @return 上机信息
+     */
+    public Business selectBasicBusinessById(Integer id) {
+        Business params = new Business();
+        params.setId(id);
+        List<Business> list = this.selectAll(params);
+        return list.size() == 0 ? null : list.get(0);
     }
 
     /**

@@ -76,7 +76,7 @@ public class TokenUtils {
                 if (RoleEnum.ADMIN.name().equals(role)) {
                     return staticAdminService.selectById(Integer.valueOf(userId));
                 } else if (RoleEnum.BUSINESS.name().equals(role)) {
-                    return staticBusinessService.selectById(Integer.valueOf(userId));
+                    return staticBusinessService.selectBasicBusinessById(Integer.valueOf(userId));
                 } else if (RoleEnum.USER.name().equals(role)) {
                     return staticUserService.selectById(Integer.valueOf(userId));
                 }
