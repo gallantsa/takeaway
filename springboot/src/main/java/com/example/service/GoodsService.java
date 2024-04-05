@@ -149,7 +149,8 @@ public class GoodsService {
 
         int saleCount = 0;
         for (OrdersItem ordersItem : usageOrdersItemList) {
-            saleCount += ordersItem.getNum();
+            if (ordersItem.getGoodsId() == goods.getId())
+                saleCount += ordersItem.getNum();
         }
         goods.setSaleCount(saleCount);
         return goods;
