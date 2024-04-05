@@ -15,8 +15,8 @@
 
 							<view style="display: flex;  color: #666; ">
 								<view style="flex: 1;">
-									<text style="color: #ff9800; font-weight: bold;">4.5分</text>
-									<text style="margin-left: 10rpx;">已售30</text>
+									<text style="color: #ff9800; font-weight: bold;">{{ item.score }}分</text>
+									<text style="margin-left: 10rpx;">已售{{ item.nums }}</text>
 								</view>
 								<view style="flex: 1; text-align: right;">30分钟内送达</text>
 								</view>

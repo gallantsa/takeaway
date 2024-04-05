@@ -171,4 +171,7 @@ public class OrdersService {
         return PageInfo.of(list);
     }
 
+    public List<Orders> selectUsageByBusinessId(Integer businessId) {
+        return ordersMapper.selectUsageByBusinessId(businessId);
+    }
 }

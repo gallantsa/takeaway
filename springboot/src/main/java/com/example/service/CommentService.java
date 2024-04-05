@@ -99,4 +99,7 @@ public class CommentService {
         return PageInfo.of(list);
     }
 
+    public List<Comment> selectByBusinessId(Integer businessId) {
+        return commentMapper.selectByBusinessId(businessId);
+    }
 }

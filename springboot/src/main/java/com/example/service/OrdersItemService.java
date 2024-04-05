@@ -80,4 +80,10 @@ public class OrdersItemService {
     public void deleteByOrderId(Integer orderId) {
         ordersItemMapper.deleteByOrderId(orderId);
     }
+
+    public List<OrdersItem> selectByOrderId(Integer orderId) {
+        OrdersItem ordersItem = new OrdersItem();
+        ordersItem.setOrderId(orderId);
+        return ordersItemMapper.selectAll(ordersItem);
+    }
 }

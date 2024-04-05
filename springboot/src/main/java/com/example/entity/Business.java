@@ -71,9 +71,35 @@ public class Business extends Account {
     private String type;
 
     /**
+     * 商家评分
+     */
+    private Double score;
+
+    /**
      * 是否收藏
      */
     private Boolean isCollect;
+
+    /**
+     * 总销售数量
+     */
+    private Integer nums;
+
+    public Integer getNums() {
+        return nums;
+    }
+
+    public void setNums(Integer nums) {
+        this.nums = nums;
+    }
+
+    public Double getScore() {
+        return score;
+    }
+
+    public void setScore(Double score) {
+        this.score = score;
+    }
 
     public Boolean getIsCollect() {
         return isCollect;
