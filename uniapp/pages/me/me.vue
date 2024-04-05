@@ -1,7 +1,8 @@
 <template>
 	<view style="padding: 20rpx;">
 		<view class="box" style="display: flex; align-items: center; margin-bottom: 20rpx;">
-			<image :src="user.avatar" style="width: 150rpx; border-radius: 50%;" mode="widthFix"></image>
+			<image :src="user.avatar" style="width: 150rpx; height: 150rpx; border-radius: 50%;" mode="aspectFill">
+			</image>
 			<view style="flex: 1; margin-left: 30rpx;">
 				<view style="margin-bottom: 20rpx; font-size: 32rpx;">{{ user.username }}</view>
 				<view style="color: #888;">{{ user.name }}</view>
