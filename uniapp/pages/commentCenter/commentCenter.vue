@@ -1,6 +1,6 @@
 <template>
 	<view style="padding: 20rpx;">
-		<view class="box">
+		<view class="box" v-if="commentList.length">
 			<view v-for="item in commentList" :key="item.id" style="border-bottom: 2rpx solid #eee; padding: 20rpx 0;">
 				<navigator :url="'/pages/detail/detail?businessId=' + item.businessId"
 					style="font-size: 34rpx; display: inline-block; margin-bottom: 10rpx;">
