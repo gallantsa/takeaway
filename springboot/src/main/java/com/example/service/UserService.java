@@ -13,6 +13,7 @@ import com.example.utils.TokenUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -29,6 +30,12 @@ public class UserService {
     @Resource
     private UserMapper userMapper;
 
+    @Value("${server.port:9090}")
+    private String port;
+
+    @Value("${ip:localhost}")
+    private String ip;
+
     /**
      * 新增
      */
@@ -40,6 +47,8 @@ public class UserService {
         if (ObjectUtil.isEmpty(user.getName())) {
             user.setName(user.getUsername());
         }
+        String http = "http://" + ip + ":" + port + "/files/";
+        user.setAvatar(http + "1697438073596-avatar.png");
         user.setRole(RoleEnum.USER.name());
         userMapper.insert(user);
     }
